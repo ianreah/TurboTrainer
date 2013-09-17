@@ -11,3 +11,4 @@ _ReSharper.*
 
 # mstest test results
 TestResults
+TestResult.xml
