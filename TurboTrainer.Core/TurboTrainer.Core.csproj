@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="gpx.cs" />
     <Compile Include="GpxPoint.cs" />
+    <Compile Include="GpxPointsExtensions.cs" />
     <Compile Include="GpxReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
