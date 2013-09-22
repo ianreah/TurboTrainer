@@ -12,3 +12,7 @@ _ReSharper.*
 # mstest test results
 TestResults
 TestResult.xml
+
+# Upgrade files (I'm going to keep getting these using different express editions, etc)
+UpgradeLog*
+_UpgradeReport_Files
