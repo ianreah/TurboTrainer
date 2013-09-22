@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurboTrainer", "TurboTrainer\TurboTrainer.csproj", "{B1B93890-881E-4FBE-A476-B65C8420D05C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurboTrainer.Web", "TurboTrainer.Web\TurboTrainer.Web.csproj", "{B1B93890-881E-4FBE-A476-B65C8420D05C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurboTrainer.Core", "TurboTrainer.Core\TurboTrainer.Core.csproj", "{440E5537-F4FF-4DC3-A0E5-A55E9EF2FF40}"
 EndProject
