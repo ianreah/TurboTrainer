@@ -10,15 +10,14 @@ namespace TurboTrainer.Core
 	{
 		public static IObservable<GpxPoint> Replay(this IEnumerable<GpxPoint> gpxPoints, IScheduler scheduler)
 		{
-			var gpxPointsList = gpxPoints.ToList();
-			if (!gpxPointsList.Any())
+            var firstPoint = gpxPoints.FirstOrDefault();
+			if (firstPoint == null)
 			{
 				return Observable.Empty<GpxPoint>();
 			}
 
-			var firstPoint = gpxPointsList[0];
 			var previousTime = firstPoint.Time;
-			return Observable.Generate(initialState: gpxPointsList.Skip(1).GetEnumerator(),
+            return Observable.Generate(initialState: gpxPoints.Skip(1).GetEnumerator(),
 									   condition: x => x.MoveNext(),
 									   iterate: x => { previousTime = x.Current.Time; return x; },
 									   resultSelector: x => x.Current,
