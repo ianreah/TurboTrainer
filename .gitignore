@@ -9,10 +9,12 @@ obj
 # Resharper folder
 _ReSharper.*
 
-# mstest test results
+# unit test files
 TestResults
 TestResult.xml
+*VisualState.xml
 
 # Upgrade files (I'm going to keep getting these using different express editions, etc)
 UpgradeLog*
 _UpgradeReport_Files
+
