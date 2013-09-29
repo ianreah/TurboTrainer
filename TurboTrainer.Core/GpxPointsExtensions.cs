@@ -16,12 +16,12 @@ namespace TurboTrainer.Core
 				return Observable.Empty<GpxPoint>();
 			}
 
-			var previousTime = firstPoint.Time;
-            return Observable.Generate(initialState: gpxPoints.Skip(1).GetEnumerator(),
-									   condition: x => x.MoveNext(),
-									   iterate: x => { previousTime = x.Current.Time; return x; },
-									   resultSelector: x => x.Current,
-									   timeSelector: x => x.Current.Time - previousTime,
+            var pointsEnumerator = gpxPoints.Skip(1).GetEnumerator();
+            return Observable.Generate(initialState: firstPoint.Time,
+									   condition: x => pointsEnumerator.MoveNext(),
+									   iterate: x => pointsEnumerator.Current.Time,
+									   resultSelector: x => pointsEnumerator.Current,
+									   timeSelector: x => pointsEnumerator.Current.Time - x,
 									   scheduler: scheduler)
 							 .StartWith(firstPoint);
 		}
