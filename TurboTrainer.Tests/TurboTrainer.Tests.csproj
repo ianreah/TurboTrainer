@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GpxPointTestExtensions.cs" />
     <Compile Include="GpxReaderTests.cs" />
     <Compile Include="GpxReplayTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
