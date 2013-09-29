@@ -58,6 +58,8 @@
     <Compile Include="GpxPoint.cs" />
     <Compile Include="GpxPointsExtensions.cs" />
     <Compile Include="GpxReader.cs" />
+    <Compile Include="IFileChooserUi.cs" />
+    <Compile Include="MainViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
