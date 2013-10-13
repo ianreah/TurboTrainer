@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iOSRxSample", "iOSRxSample\iOSRxSample.csproj", "{6A9EF924-634C-4CE1-91AE-88543B957F77}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+		Release|iPhone = Release|iPhone
+		Ad-Hoc|iPhone = Ad-Hoc|iPhone
+		AppStore|iPhone = AppStore|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6A9EF924-634C-4CE1-91AE-88543B957F77}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
+		{6A9EF924-634C-4CE1-91AE-88543B957F77}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
+		{6A9EF924-634C-4CE1-91AE-88543B957F77}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
+		{6A9EF924-634C-4CE1-91AE-88543B957F77}.AppStore|iPhone.Build.0 = AppStore|iPhone
+		{6A9EF924-634C-4CE1-91AE-88543B957F77}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{6A9EF924-634C-4CE1-91AE-88543B957F77}.Debug|iPhone.Build.0 = Debug|iPhone
+		{6A9EF924-634C-4CE1-91AE-88543B957F77}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{6A9EF924-634C-4CE1-91AE-88543B957F77}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{6A9EF924-634C-4CE1-91AE-88543B957F77}.Release|iPhone.ActiveCfg = Release|iPhone
+		{6A9EF924-634C-4CE1-91AE-88543B957F77}.Release|iPhone.Build.0 = Release|iPhone
+		{6A9EF924-634C-4CE1-91AE-88543B957F77}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{6A9EF924-634C-4CE1-91AE-88543B957F77}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = iOSRxSample\iOSRxSample.csproj
+	EndGlobalSection
+EndGlobal

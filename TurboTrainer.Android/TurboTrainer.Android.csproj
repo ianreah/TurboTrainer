@@ -44,11 +44,53 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
+    <Reference Include="System.Reactive.Core">
+      <HintPath>..\Components\rxforxamarin-2.1\lib\android\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Debugger">
+      <HintPath>..\Components\rxforxamarin-2.1\lib\android\System.Reactive.Debugger.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Experimental">
+      <HintPath>..\Components\rxforxamarin-2.1\lib\android\System.Reactive.Experimental.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces">
+      <HintPath>..\Components\rxforxamarin-2.1\lib\android\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Linq">
+      <HintPath>..\Components\rxforxamarin-2.1\lib\android\System.Reactive.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices">
+      <HintPath>..\Components\rxforxamarin-2.1\lib\android\System.Reactive.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Providers">
+      <HintPath>..\Components\rxforxamarin-2.1\lib\android\System.Reactive.Providers.dll</HintPath>
+    </Reference>
+	<Reference Include="ReactiveUI">
+      <HintPath>AssemblyReferences\ReactiveUI.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\TurboTrainer.Core\gpx.cs">
+      <Link>TurboTrainer.Core\gpx.cs</Link>
+    </Compile>
+    <Compile Include="..\TurboTrainer.Core\GpxPoint.cs">
+      <Link>TurboTrainer.Core\GpxPoint.cs</Link>
+    </Compile>
+    <Compile Include="..\TurboTrainer.Core\GpxPointsExtensions.cs">
+      <Link>TurboTrainer.Core\GpxPointsExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\TurboTrainer.Core\GpxReader.cs">
+      <Link>TurboTrainer.Core\GpxReader.cs</Link>
+    </Compile>
+    <Compile Include="..\TurboTrainer.Core\IFileChooserUi.cs">
+      <Link>TurboTrainer.Core\IFileChooserUi.cs</Link>
+    </Compile>
+    <Compile Include="..\TurboTrainer.Core\MainViewModel.cs">
+      <Link>TurboTrainer.Core\MainViewModel.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
@@ -61,5 +103,12 @@
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Assets\" />
+    <Folder Include="TurboTrainer.Core\" />
+  </ItemGroup>
+  <ItemGroup>
+    <XamarinComponentReference Include="rxforxamarin">
+      <Version>2.1</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
   </ItemGroup>
 </Project>
