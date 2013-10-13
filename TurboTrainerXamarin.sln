@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurboTrainer.Android", "TurboTrainer.Android\TurboTrainer.Android.csproj", "{01EAFA87-905B-4AB1-87A6-09D090ED43F1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{01EAFA87-905B-4AB1-87A6-09D090ED43F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01EAFA87-905B-4AB1-87A6-09D090ED43F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01EAFA87-905B-4AB1-87A6-09D090ED43F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01EAFA87-905B-4AB1-87A6-09D090ED43F1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = TurboTrainer.Android\TurboTrainer.Android.csproj
+	EndGlobalSection
+EndGlobal

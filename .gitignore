@@ -6,6 +6,9 @@ obj
 *.user
 *.suo
 
+# Xamarin Studio user files
+*.userprefs
+
 # Resharper folder
 _ReSharper.*
 
