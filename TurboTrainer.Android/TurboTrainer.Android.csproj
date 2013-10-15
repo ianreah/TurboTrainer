@@ -65,12 +65,13 @@
     <Reference Include="System.Reactive.Providers">
       <HintPath>..\Components\rxforxamarin-2.1\lib\android\System.Reactive.Providers.dll</HintPath>
     </Reference>
-	<Reference Include="ReactiveUI">
+    <Reference Include="ReactiveUI">
       <HintPath>AssemblyReferences\ReactiveUI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
+    <Compile Include="FileChooser.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="..\TurboTrainer.Core\gpx.cs">
@@ -106,6 +107,7 @@
     <Folder Include="TurboTrainer.Core\" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidAsset Include="Assets\SampleGpxDocument.txt" />
     <XamarinComponentReference Include="rxforxamarin">
       <Version>2.1</Version>
       <Visible>False</Visible>
