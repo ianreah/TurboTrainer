@@ -3,18 +3,19 @@ using Android.OS;
 using TurboTrainer.Core;
 using ReactiveUI;
 using Android.Widget;
+using ReactiveUI.Android;
 
 namespace TurboTrainer
 {
 	[Activity (Label = "TurboTrainer", MainLauncher = true)]
-	public class MainActivity : Activity, IViewFor<MainViewModel>
+	public class MainActivity : ReactiveActivity, IViewFor<MainViewModel>
 	{
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.Main);
 
-			ViewModel = new MainViewModel(RxApp.TaskpoolScheduler, new FileChooser(Assets));
+			ViewModel = new MainViewModel(RxApp.TaskpoolScheduler, RxApp.MainThreadScheduler, new FileChooser(Assets));
 
 			GradientText = FindViewById<TextView>(Resource.Id.gradientText);
 			this.OneWayBind(ViewModel, vm => vm.CurrentPoint.Elevation, v => v.GradientText.Text);

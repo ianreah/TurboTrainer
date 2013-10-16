@@ -1,4 +1,5 @@
-﻿using System.Reactive.Concurrency;
+﻿using ReactiveUI;
+using System.Reactive.Concurrency;
 using System.Windows;
 using TurboTrainer.Core;
 
@@ -10,7 +11,7 @@ namespace TurboTrainer.Wpf
         {
             InitializeComponent();
 
-            DataContext = new MainViewModel(Scheduler.Default, new FileChooserUi());
+            DataContext = new MainViewModel(RxApp.TaskpoolScheduler, RxApp.MainThreadScheduler, new FileChooserUi());
         }
     }
 }

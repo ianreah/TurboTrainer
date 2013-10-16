@@ -4,6 +4,7 @@ using System;
 using TurboTrainer.Core;
 using System.Reactive.Linq;
 using System.Collections.Generic;
+using ReactiveUI;
 
 namespace TurboTrainer.Tests
 {
@@ -59,7 +60,7 @@ namespace TurboTrainer.Tests
         private MainViewModel InitialiseViewModel()
         {
             scheduler = new TestScheduler();
-            return new MainViewModel(scheduler, new TestFileChooser());
+            return new MainViewModel(scheduler, RxApp.MainThreadScheduler, new TestFileChooser());
         }
 
         private static void ExecuteAndWaitForLoadGpxDataCommand(MainViewModel vm)

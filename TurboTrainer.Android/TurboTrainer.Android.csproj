@@ -68,6 +68,9 @@
     <Reference Include="ReactiveUI">
       <HintPath>AssemblyReferences\ReactiveUI.dll</HintPath>
     </Reference>
+    <Reference Include="ReactiveUI.Android">
+      <HintPath>AssemblyReferences\ReactiveUI.Android.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
