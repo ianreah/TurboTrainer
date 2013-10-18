@@ -15,7 +15,7 @@ namespace TurboTrainer
 			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.Main);
 
-			ViewModel = new MainViewModel(RxApp.TaskpoolScheduler, RxApp.MainThreadScheduler, new FileChooser(Assets));
+			ViewModel = new MainViewModel(RxApp.TaskpoolScheduler, new FileChooser(Assets));
 
 			GradientText = FindViewById<TextView>(Resource.Id.gradientText);
 			this.OneWayBind(ViewModel, vm => vm.CurrentPoint.Elevation, v => v.GradientText.Text);
