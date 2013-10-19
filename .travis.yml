@@ -5,5 +5,5 @@ language: c
 install:
   - sudo apt-get install mono-devel mono-gmcs nunit-console
 script:
-  - xbuild TurboTrainer.sln
+  - xbuild TurboTrainer.Xamarin.sln
   - nunit-console TurboTrainer.Tests.nunit
