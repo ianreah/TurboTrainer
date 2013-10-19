@@ -1,9 +1,0 @@
-## Travis CI Integration
-
-language: c
-
-install:
-  - sudo apt-get install mono-devel mono-gmcs nunit-console
-script:
-  - xbuild TurboTrainerXamarin.sln
-  - nunit-console TurboTrainer.Tests.nunit
