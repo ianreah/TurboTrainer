@@ -95,6 +95,7 @@
     <Compile Include="..\TurboTrainer.Core\MainViewModel.cs">
       <Link>TurboTrainer.Core\MainViewModel.cs</Link>
     </Compile>
+    <Compile Include="CreatesAndroidButtonCommandBinding.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />

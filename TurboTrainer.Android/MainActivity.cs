@@ -15,14 +15,16 @@ namespace TurboTrainer
 			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.Main);
 
+			var resolver = (IMutableDependencyResolver)RxApp.DependencyResolver;
+			resolver.Register(() => new CreatesAndroidButtonCommandBinding(), typeof(ICreatesCommandBinding));
+
 			ViewModel = new MainViewModel(RxApp.TaskpoolScheduler, new FileChooser(Assets));
 
 			GradientText = FindViewById<TextView>(Resource.Id.gradientText);
 			this.OneWayBind(ViewModel, vm => vm.CurrentPoint.Elevation, v => v.GradientText.Text);
 
 			LoadGpxButton = FindViewById<Button>(Resource.Id.loadGpxButton);
-			//this.BindCommand(ViewModel, vm => vm.LoadGpxDataCommand, v => v.LoadGpxButton); <-- this is how I want to do it...work out why this isn't working
-			LoadGpxButton.Click += (sender, e) => ViewModel.LoadGpxDataCommand.Execute(null); // Just do it with a click handler for now!
+			this.BindCommand(ViewModel, vm => vm.LoadGpxDataCommand, v => v.LoadGpxButton);
 		}
 
 		public MainViewModel ViewModel { get; set; }
