@@ -13,7 +13,7 @@ namespace TurboTrainer.Core
         {
             var gpxReplays = loadGpxDataCommand.RegisterAsyncFunction(_ =>
 	                               {
-									   using (var stream = fileChooser.ChooseFile())
+									   using (var stream = fileChooser.ChooseFile().Result)
 									   {
 										   var reader = new GpxReader(stream);
 										   return reader.Points.Replay(backgroundScheduler);

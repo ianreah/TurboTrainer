@@ -1,9 +1,10 @@
 ﻿using System.IO;
+using System.Threading.Tasks;
 
 namespace TurboTrainer.Core
 {
     public interface IFileChooserUi
     {
-        Stream ChooseFile();
+        Task<Stream> ChooseFile();
     }
 }
