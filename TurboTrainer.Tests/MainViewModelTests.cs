@@ -4,6 +4,9 @@ using System;
 using TurboTrainer.Core;
 using System.Reactive.Linq;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace TurboTrainer.Tests
 {
@@ -24,7 +27,7 @@ namespace TurboTrainer.Tests
         {
             var vm = InitialiseViewModel();
 
-            ExecuteAndWaitForLoadGpxDataCommand(vm);
+	        Assert.That(ExecuteLoadGpxDataCommandAsync(vm).Result, Is.True);
 
             vm.CurrentPoint.AssertPoint(47.644548, -122.326897, 4.46, "2009-10-17T18:37:26Z");
         }
@@ -38,7 +41,7 @@ namespace TurboTrainer.Tests
             var propertyUpdates = new List<string>();
             vm.Changed.Subscribe(x => propertyUpdates.Add(x.PropertyName));
 
-            ExecuteAndWaitForLoadGpxDataCommand(vm);
+	        Assert.That(ExecuteLoadGpxDataCommandAsync(vm).Result, Is.True);
 
             scheduler.AdvanceBy(1);
             Assert.That(propertyUpdates.Count, Is.EqualTo(1));
@@ -56,16 +59,34 @@ namespace TurboTrainer.Tests
             vm.CurrentPoint.AssertPoint(47.644548, -122.326897, 6.87, "2009-10-17T18:37:34Z");
         }
 
-        private MainViewModel InitialiseViewModel()
+		[Test, Timeout(500)]
+		public void LoadGpxCommandExecute_WhenStreamIsNull_DoesntCrash() // This can happen if the file chooser is cancelled
         {
-            scheduler = new TestScheduler();
-            return new MainViewModel(scheduler, new TestFileChooser());
+            var vm = InitialiseViewModel(Stream.Null);
+
+            Assert.That(ExecuteLoadGpxDataCommandAsync(vm).Result, Is.True);
         }
 
-        private static void ExecuteAndWaitForLoadGpxDataCommand(MainViewModel vm)
+        private MainViewModel InitialiseViewModel()
         {
+            return InitialiseViewModel(new MemoryStream(Encoding.UTF8.GetBytes(Properties.Resources.SampleGpxDocument)));
+        }
+
+        private MainViewModel InitialiseViewModel(Stream stream)
+        {
+            scheduler = new TestScheduler();
+            return new MainViewModel(scheduler, new TestFileChooser(stream));
+        }
+
+        private static Task<bool> ExecuteLoadGpxDataCommandAsync(MainViewModel vm)
+        {
+            var completionSource = new TaskCompletionSource<bool>();
+
+            vm.LoadGpxDataCommand.ThrownExceptions.Subscribe(_ => completionSource.SetResult(false));
             vm.LoadGpxDataCommand.Execute(null);
-            vm.LoadGpxDataCommand.IsExecuting.FirstAsync(x => x == false).Wait();
+            vm.LoadGpxDataCommand.IsExecuting.FirstAsync(x => x == false).Subscribe(_ => { completionSource.SetResult(true); });
+
+            return completionSource.Task;
         }
     }
 }

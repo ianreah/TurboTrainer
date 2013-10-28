@@ -1,4 +1,5 @@
-﻿using ReactiveUI;
+﻿using System.IO;
+using ReactiveUI;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 
@@ -15,6 +16,13 @@ namespace TurboTrainer.Core
 	                               {
 									   using (var stream = fileChooser.ChooseFile().Result)
 									   {
+										   // Stream.Null means the user cancelled the file choosing
+										   // TODO: A better way for ChooseFile to indicate user cancelling
+										   if (stream == Stream.Null)
+										   {
+											   return Observable.Empty<GpxPoint>();
+										   }
+
 										   var reader = new GpxReader(stream);
 										   return reader.Points.Replay(backgroundScheduler);
 									   }
