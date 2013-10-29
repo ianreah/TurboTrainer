@@ -2,8 +2,18 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="350" Width="525">
-    <StackPanel>
-      <TextBlock Text="{Binding CurrentPoint.Elevation}"></TextBlock>
-      <Button Command="{Binding LoadGpxDataCommand}">Load GPX File</Button>
-    </StackPanel>
+  
+    <DockPanel>
+      
+      <Button DockPanel.Dock="Bottom"
+              Command="{Binding LoadGpxDataCommand}"
+              Margin="10"
+              Content="Load GPX File"/>
+      
+      <TextBlock HorizontalAlignment="Center"
+                 VerticalAlignment="Center"
+                 Text="{Binding CurrentPoint.Elevation}"
+                 FontSize="60pt"/>
+      
+    </DockPanel>
 </Window>
