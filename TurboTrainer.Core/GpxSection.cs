@@ -16,7 +16,7 @@ namespace TurboTrainer.Core
             this.end = end;
 
             distanceWithGradient = new Lazy<Tuple<double,double>>(() => GisMaths.DistanceWithGradient(start, end));
-            timeTaken = new Lazy<TimeSpan>(() => end.Time - start.Time);
+            timeTaken = new Lazy<TimeSpan>(() => start.Time - start.Time);
         }
 
         public GpxPoint Start { get { return start; } }
