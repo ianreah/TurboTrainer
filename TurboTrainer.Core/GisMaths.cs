@@ -11,6 +11,8 @@ namespace TurboTrainer.Core
             var dLatitude = (last.Latitude - first.Latitude).ToRadians();
             var dLongitude = (last.Longitude - first.Longitude).ToRadians();
 
+            don't compile
+
             var startLatitude = first.Latitude.ToRadians();
             var endLatitude = last.Latitude.ToRadians();
 
