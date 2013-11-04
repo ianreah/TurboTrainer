@@ -25,5 +25,23 @@ namespace TurboTrainer.Core
 									   scheduler: scheduler)
 							 .StartWith(firstPoint);
 		}
+
+		public static IEnumerable<GpxSection> ToGpxSections(this IEnumerable<GpxPoint> gpxPoints)
+		{
+			using (var iterator = gpxPoints.GetEnumerator())
+			{
+				if (!iterator.MoveNext())
+				{
+					yield break;
+				}
+
+				var previous = iterator.Current;
+				while (iterator.MoveNext())
+				{
+					yield return new GpxSection(previous, iterator.Current);
+					previous = iterator.Current;
+				}
+			}
+		}
 	}
 }

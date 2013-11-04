@@ -61,9 +61,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GpxPointsToGpxSectionsTests.cs" />
     <Compile Include="GpxPointTestExtensions.cs" />
     <Compile Include="GpxReaderTests.cs" />
     <Compile Include="GpxReplayTests.cs" />
+    <Compile Include="GpxSectionTestExtensions.cs" />
     <Compile Include="GpxSectionTests.cs" />
     <Compile Include="MainViewModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
