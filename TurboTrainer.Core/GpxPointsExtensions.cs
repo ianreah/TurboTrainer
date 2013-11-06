@@ -8,22 +8,23 @@ namespace TurboTrainer.Core
 {
 	public static class GpxPointsExtensions
 	{
-		public static IObservable<GpxPoint> Replay(this IEnumerable<GpxPoint> gpxPoints, IScheduler scheduler)
+		public static IObservable<GpxSection> Replay(this IEnumerable<GpxPoint> gpxPoints, IScheduler scheduler)
 		{
-            var firstPoint = gpxPoints.FirstOrDefault();
-			if (firstPoint == null)
+			var sections = gpxPoints.ToGpxSections();
+
+			var firstSection = sections.FirstOrDefault();
+			if (firstSection == null)
 			{
-				return Observable.Empty<GpxPoint>();
+				return Observable.Empty<GpxSection>();
 			}
 
-            var pointsEnumerator = gpxPoints.Skip(1).GetEnumerator();
-            return Observable.Generate(initialState: firstPoint.Time,
-									   condition: x => pointsEnumerator.MoveNext(),
-									   iterate: x => pointsEnumerator.Current.Time,
-									   resultSelector: x => pointsEnumerator.Current,
-									   timeSelector: x => pointsEnumerator.Current.Time - x,
+			return Observable.Generate(initialState: sections.Skip(1).GetEnumerator(),
+									   condition: x => x.MoveNext(),
+									   iterate: x => x,
+									   resultSelector: x => x.Current,
+									   timeSelector: x => x.Current.TimeTaken,
 									   scheduler: scheduler)
-							 .StartWith(firstPoint);
+							 .StartWith(firstSection);
 		}
 
 		public static IEnumerable<GpxSection> ToGpxSections(this IEnumerable<GpxPoint> gpxPoints)

@@ -26,7 +26,7 @@ namespace TurboTrainer.Tests
 	    }
 
 	    [Test]
-	    public void Replay_OnePoint_ObservesThePointImmediatelyThenCompletes()
+        public void Replay_OnePoint_CompletedImmediately()
 	    {
 			bool completed = false;
 			var scheduler = new TestScheduler();
@@ -36,21 +36,43 @@ namespace TurboTrainer.Tests
                 new GpxPoint(47.644548m, -122.326897m, 4.46m, DateTime.Parse("2009-10-17T18:37:26Z"))
             };
 
-			var observedPoints = new List<GpxPoint>();
+            testPoints.Replay(scheduler)
+                      .Subscribe(onNext: _ => Assert.Fail(),
+                                 onError: _ => Assert.Fail(),
+                                 onCompleted: () => completed = true);
+
+            scheduler.AdvanceBy(1);
+            Assert.That(completed, Is.True);
+        }
+
+	    [Test]
+	    public void Replay_TwoPoints_ObservesTheSectionImmediatelyThenCompletes()
+	    {
+			bool completed = false;
+			var scheduler = new TestScheduler();
+
+			var testPoints = new[]
+            {
+                new GpxPoint(47.644548m, -122.326897m, 4.46m, DateTime.Parse("2009-10-17T18:37:26Z")),
+                new GpxPoint(47.644548m, -122.326897m, 4.94m, DateTime.Parse("2009-10-17T18:37:31Z"))
+            };
+
+			var observedSections = new List<GpxSection>();
 
 			testPoints.Replay(scheduler)
-					  .Subscribe(onNext: observedPoints.Add,
+                      .Subscribe(onNext: observedSections.Add,
 								 onError: _ => Assert.Fail(),
 								 onCompleted: () => completed = true);
 
 			scheduler.AdvanceBy(1);
-			Assert.That(observedPoints.Count, Is.EqualTo(1));
-			Assert.That(observedPoints[0].Elevation, Is.EqualTo(4.46m));
+            Assert.That(observedSections.Count, Is.EqualTo(1));
+            Assert.That(observedSections[0].Start, Is.SameAs(testPoints[0]));
+            Assert.That(observedSections[0].End, Is.SameAs(testPoints[1]));
 			Assert.That(completed, Is.True);
 		}
 
 	    [Test]
-        public void Replay_SeveralPoints_ObservedAtCorrectIntervalThenCompletes()
+        public void Replay_SeveralPoints_ObservesSectionsAtCorrectIntervalThenCompletes()
         {
 			bool completed = false;
 			var scheduler = new TestScheduler();
@@ -62,27 +84,24 @@ namespace TurboTrainer.Tests
                 new GpxPoint(47.644548m, -122.326897m, 6.87m, DateTime.Parse("2009-10-17T18:37:34Z"))
             };
 
-			var observedPoints = new List<GpxPoint>();
+			var observedSections = new List<GpxSection>();
 
 			testPoints.Replay(scheduler)
-					  .Subscribe(onNext: observedPoints.Add,
+                      .Subscribe(onNext: observedSections.Add,
 								 onError: _ => Assert.Fail(),
 								 onCompleted: () => completed = true);
 
 			scheduler.AdvanceBy(1);
-			Assert.That(observedPoints.Count, Is.EqualTo(1));
-			Assert.That(observedPoints[0].Elevation, Is.EqualTo(4.46m));
-			Assert.That(completed, Is.False);
+            Assert.That(observedSections.Count, Is.EqualTo(1));
+            Assert.That(observedSections[0].Start, Is.SameAs(testPoints[0]));
+            Assert.That(observedSections[0].End, Is.SameAs(testPoints[1]));
+            Assert.That(completed, Is.False);
 
             scheduler.AdvanceBy(TimeSpan.TicksPerSecond * 5);
-            Assert.That(observedPoints.Count, Is.EqualTo(2));
-            Assert.That(observedPoints[1].Elevation, Is.EqualTo(4.94));
-			Assert.That(completed, Is.False);
-
-			scheduler.AdvanceBy(TimeSpan.TicksPerSecond * 3);
-            Assert.That(observedPoints.Count, Is.EqualTo(3));
-            Assert.That(observedPoints[2].Elevation, Is.EqualTo(6.87));
-			Assert.That(completed, Is.True);
+            Assert.That(observedSections.Count, Is.EqualTo(2));
+            Assert.That(observedSections[1].Start, Is.SameAs(testPoints[1]));
+            Assert.That(observedSections[1].End, Is.SameAs(testPoints[2]));
+            Assert.That(completed, Is.True);
         }
     }
 }

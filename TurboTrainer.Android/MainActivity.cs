@@ -26,7 +26,7 @@ namespace TurboTrainer
 			ViewModel = new MainViewModel(RxApp.TaskpoolScheduler, this);
 
 			GradientText = FindViewById<TextView>(Resource.Id.gradientText);
-			this.OneWayBind(ViewModel, vm => vm.CurrentPoint.Elevation, v => v.GradientText.Text);
+			this.OneWayBind(ViewModel, vm => vm.CurrentSection.Gradient, v => v.GradientText.Text, x => string.Format("{0:0.0}%", x));
 
 			LoadGpxButton = FindViewById<Button>(Resource.Id.loadGpxButton);
 			this.BindCommand(ViewModel, vm => vm.LoadGpxDataCommand, v => v.LoadGpxButton);

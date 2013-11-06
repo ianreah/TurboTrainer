@@ -95,6 +95,12 @@
       <Link>TurboTrainer.Core\MainViewModel.cs</Link>
     </Compile>
     <Compile Include="CreatesAndroidButtonCommandBinding.cs" />
+    <Compile Include="..\TurboTrainer.Core\GisMaths.cs">
+      <Link>TurboTrainer.Core\GisMaths.cs</Link>
+    </Compile>
+    <Compile Include="..\TurboTrainer.Core\GpxSection.cs">
+      <Link>TurboTrainer.Core\GpxSection.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />

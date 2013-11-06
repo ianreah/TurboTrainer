@@ -7,7 +7,7 @@ namespace TurboTrainer.Core
 {
     public class MainViewModel : ReactiveObject
     {
-		private readonly ObservableAsPropertyHelper<GpxPoint> currentPoint;
+		private readonly ObservableAsPropertyHelper<GpxSection> currentSection;
         private readonly ReactiveCommand loadGpxDataCommand = new ReactiveCommand();
 
         public MainViewModel(IScheduler backgroundScheduler, IFileChooserUi fileChooser)
@@ -20,7 +20,7 @@ namespace TurboTrainer.Core
 										   // TODO: A better way for ChooseFile to indicate user cancelling
 										   if (stream == Stream.Null)
 										   {
-											   return Observable.Empty<GpxPoint>();
+											   return Observable.Empty<GpxSection>();
 										   }
 
 										   var reader = new GpxReader(stream);
@@ -28,10 +28,10 @@ namespace TurboTrainer.Core
 									   }
 								   });
 
-            currentPoint = gpxReplays.Switch().ToProperty(this, x => x.CurrentPoint);
+            currentSection = gpxReplays.Switch().ToProperty(this, x => x.CurrentSection);
         }
 
-        public GpxPoint CurrentPoint { get { return currentPoint.Value; } }
+        public GpxSection CurrentSection { get { return currentSection.Value; } }
         public ReactiveCommand LoadGpxDataCommand { get { return loadGpxDataCommand; } }
     }
 }

@@ -12,7 +12,7 @@
       
       <TextBlock HorizontalAlignment="Center"
                  VerticalAlignment="Center"
-                 Text="{Binding CurrentPoint.Elevation}"
+                 Text="{Binding CurrentSection.Gradient, StringFormat={}{0:0.0}%}"
                  FontSize="60pt"/>
       
     </DockPanel>

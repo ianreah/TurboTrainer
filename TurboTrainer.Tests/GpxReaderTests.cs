@@ -18,9 +18,9 @@ namespace TurboTrainer.Tests
 
 				Assert.That(reader.Points.Count(), Is.EqualTo(3));
 				
-				reader.Points.ElementAt(0).AssertPoint(47.644548, -122.326897, 4.46, "2009-10-17T18:37:26Z");
-				reader.Points.ElementAt(1).AssertPoint(47.644548, -122.326897, 4.94, "2009-10-17T18:37:31Z");
-				reader.Points.ElementAt(2).AssertPoint(47.644548, -122.326897, 6.87, "2009-10-17T18:37:34Z");
+				reader.Points.ElementAt(0).AssertPoint(47.644548m, -122.326897m, 4.46m, "2009-10-17T18:37:26Z");
+				reader.Points.ElementAt(1).AssertPoint(47.644548m, -122.326897m, 4.94m, "2009-10-17T18:37:31Z");
+				reader.Points.ElementAt(2).AssertPoint(47.644548m, -122.326897m, 6.87m, "2009-10-17T18:37:34Z");
 			}
 		}
 	}

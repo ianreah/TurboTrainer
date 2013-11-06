@@ -16,24 +16,25 @@ namespace TurboTrainer.Tests
         private TestScheduler scheduler;
 
         [Test]
-        public void CurrentPoint_AfterConstruction_IsNull()
+        public void CurrentSection_AfterConstruction_IsNull()
         {
             var vm = InitialiseViewModel();
-            Assert.That(vm.CurrentPoint, Is.Null);
+            Assert.That(vm.CurrentSection, Is.Null);
         }
 
         [Test, Timeout(500)]
-        public void CurrentPoint_AfterLoadingGpx_EqualsFirstPointInGpx()
+        public void CurrentSection_AfterLoadingGpx_EqualsFirstSectionInGpx()
         {
             var vm = InitialiseViewModel();
 
 	        Assert.That(ExecuteLoadGpxDataCommandAsync(vm).Result, Is.True);
 
-            vm.CurrentPoint.AssertPoint(47.644548, -122.326897, 4.46, "2009-10-17T18:37:26Z");
-        }
+            vm.CurrentSection.AssertSection(47.644548m, -122.326897m, 4.46m, "2009-10-17T18:37:26Z",
+											47.644548m, -122.326897m, 4.94m, "2009-10-17T18:37:31Z");
+		}
 
         [Test, Timeout(500)]
-        public void CurrentPoint_AfterLoadingGpxAndWaiting_IsUpdatedAtTheCorrectTimes()
+        public void CurrentSection_AfterLoadingGpxAndWaiting_IsUpdatedAtTheCorrectTimes()
         {
             var vm = InitialiseViewModel();
 
@@ -45,18 +46,15 @@ namespace TurboTrainer.Tests
 
             scheduler.AdvanceBy(1);
             Assert.That(propertyUpdates.Count, Is.EqualTo(1));
-            Assert.That(propertyUpdates[0], Is.EqualTo("CurrentPoint"));
-            vm.CurrentPoint.AssertPoint(47.644548, -122.326897, 4.46, "2009-10-17T18:37:26Z");
+            Assert.That(propertyUpdates[0], Is.EqualTo("CurrentSection"));
+            vm.CurrentSection.AssertSection(47.644548m, -122.326897m, 4.46m, "2009-10-17T18:37:26Z",
+											47.644548m, -122.326897m, 4.94m, "2009-10-17T18:37:31Z");
 
             scheduler.AdvanceBy(TimeSpan.TicksPerSecond * 5);
             Assert.That(propertyUpdates.Count, Is.EqualTo(2));
-            Assert.That(propertyUpdates[1], Is.EqualTo("CurrentPoint"));
-            vm.CurrentPoint.AssertPoint(47.644548, -122.326897, 4.94, "2009-10-17T18:37:31Z");
-
-            scheduler.AdvanceBy(TimeSpan.TicksPerSecond * 3);
-            Assert.That(propertyUpdates.Count, Is.EqualTo(3));
-            Assert.That(propertyUpdates[0], Is.EqualTo("CurrentPoint"));
-            vm.CurrentPoint.AssertPoint(47.644548, -122.326897, 6.87, "2009-10-17T18:37:34Z");
+            Assert.That(propertyUpdates[1], Is.EqualTo("CurrentSection"));
+	        vm.CurrentSection.AssertSection(47.644548m, -122.326897m, 4.94m, "2009-10-17T18:37:31Z",
+											47.644548m, -122.326897m, 6.87m, "2009-10-17T18:37:34Z");
         }
 
 		[Test, Timeout(500)]
