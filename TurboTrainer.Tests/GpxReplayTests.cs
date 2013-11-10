@@ -68,7 +68,15 @@ namespace TurboTrainer.Tests
             Assert.That(observedSections.Count, Is.EqualTo(1));
             Assert.That(observedSections[0].Start, Is.SameAs(testPoints[0]));
             Assert.That(observedSections[0].End, Is.SameAs(testPoints[1]));
-			Assert.That(completed, Is.True);
+			Assert.That(completed, Is.False);
+
+            // Waits for the time between the last two points before completing
+            scheduler.AdvanceBy(TimeSpan.TicksPerSecond * 4);
+            Assert.That(observedSections.Count, Is.EqualTo(1));
+            Assert.That(completed, Is.False);
+
+            scheduler.AdvanceBy(TimeSpan.TicksPerSecond);
+            Assert.That(completed, Is.True);
 		}
 
 	    [Test]
@@ -106,6 +114,14 @@ namespace TurboTrainer.Tests
             Assert.That(observedSections.Count, Is.EqualTo(2));
             Assert.That(observedSections[1].Start, Is.SameAs(testPoints[1]));
             Assert.That(observedSections[1].End, Is.SameAs(testPoints[2]));
+            Assert.That(completed, Is.False);
+
+            // Waits for the time between the last two points before completing
+            scheduler.AdvanceBy(TimeSpan.TicksPerSecond * 2);
+            Assert.That(observedSections.Count, Is.EqualTo(2));
+            Assert.That(completed, Is.False);
+
+            scheduler.AdvanceBy(TimeSpan.TicksPerSecond);
             Assert.That(completed, Is.True);
         }
     }

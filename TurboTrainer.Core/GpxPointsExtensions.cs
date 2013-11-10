@@ -18,10 +18,13 @@ namespace TurboTrainer.Core
 				return Observable.Empty<GpxSection>();
 			}
 
-            var sectionsEnumerator = sections.Skip(1).GetEnumerator();
+            var sectionsEnumerator = sections.Skip(1)
+                                             .Concat(new GpxSection[] { null })
+                                             .GetEnumerator();
+
 			return Observable.Generate(initialState: firstSection.TimeTaken,
                                        condition: x => sectionsEnumerator.MoveNext(),
-                                       iterate: x => sectionsEnumerator.Current.TimeTaken,
+                                       iterate: x => sectionsEnumerator.Current == null ? TimeSpan.Zero : sectionsEnumerator.Current.TimeTaken,
                                        resultSelector: x => sectionsEnumerator.Current,
 									   timeSelector: x => x,
 									   scheduler: scheduler)
