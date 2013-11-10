@@ -97,7 +97,12 @@ namespace TurboTrainer.Tests
             Assert.That(observedSections[0].End, Is.SameAs(testPoints[1]));
             Assert.That(completed, Is.False);
 
-            scheduler.AdvanceBy(TimeSpan.TicksPerSecond * 5);
+            // Nothing for the time between the first two points
+            scheduler.AdvanceBy(TimeSpan.TicksPerSecond * 4);
+            Assert.That(observedSections.Count, Is.EqualTo(1));
+            Assert.That(completed, Is.False);
+
+            scheduler.AdvanceBy(TimeSpan.TicksPerSecond);
             Assert.That(observedSections.Count, Is.EqualTo(2));
             Assert.That(observedSections[1].Start, Is.SameAs(testPoints[1]));
             Assert.That(observedSections[1].End, Is.SameAs(testPoints[2]));

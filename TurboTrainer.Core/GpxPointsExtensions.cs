@@ -18,11 +18,12 @@ namespace TurboTrainer.Core
 				return Observable.Empty<GpxSection>();
 			}
 
-			return Observable.Generate(initialState: sections.Skip(1).GetEnumerator(),
-									   condition: x => x.MoveNext(),
-									   iterate: x => x,
-									   resultSelector: x => x.Current,
-									   timeSelector: x => x.Current.TimeTaken,
+            var sectionsEnumerator = sections.Skip(1).GetEnumerator();
+			return Observable.Generate(initialState: firstSection.TimeTaken,
+                                       condition: x => sectionsEnumerator.MoveNext(),
+                                       iterate: x => sectionsEnumerator.Current.TimeTaken,
+                                       resultSelector: x => sectionsEnumerator.Current,
+									   timeSelector: x => x,
 									   scheduler: scheduler)
 							 .StartWith(firstSection);
 		}
