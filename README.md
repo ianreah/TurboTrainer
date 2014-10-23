@@ -1,7 +1,7 @@
 TurboTrainer
 ============
 
-[![Build status](https://ci.appveyor.com/api/projects/status?id=v5e087xb0gs3gwu8)](https://ci.appveyor.com/project/turbotrainer)
+[![Build status](https://ci.appveyor.com/api/projects/status/v5e087xb0gs3gwu8?svg=true)](https://ci.appveyor.com/project/ianreah/turbotrainer)
 
 TurboTrainer is a really simple application that loads in a GPX file and plays it back in real time, displaying the route’s current gradient on the screen.
 
